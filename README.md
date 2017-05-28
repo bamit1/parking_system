@@ -8,6 +8,7 @@ About :
 This system contains a total of 3 API's : 
 
 1.  "{host}/parking/scheme" : This is aims to be a Admin section api so that the cost calution algorithm can be set by admin.
+Price Scheme is same for all days and is updated whenever admin updates the system
 Its request body is of format :
 
 {
@@ -17,9 +18,9 @@ Its request body is of format :
 
 where 'vType' is vehicle type (Accepted Values : "TWO_WHEELER" , "FOUR_WHEELER") ,
      'cType' is the scheme definition. It is a list of definitions for cost calculation. 
-     here, type tells whether it is of fixed hour charges type or per hour charges type (Accepted Values : "ft" , "vt")
+     Here, type tells whether it is of fixed hour charges type or per hour charges type (Accepted Values : "ft" , "vt")
 
-eg. for cType : 
+eg: 
 Body: "cType":[{"type":"ft","hours":2,"price":25.0},{"type":"ft","hours":3,"price":20.0},{"type":"vt","hours":null,"price":5.0}]
 Meaning:"Rs 25 for first 2 hours then Rs 20 for next 3 hours, then Rs 5 every hour"
 
@@ -71,6 +72,6 @@ Build command : mvn clean install
 
 Run Command : mvn clean install tomcat7:run-war -Dmysql-username={username} -Dmysql-password={password} -Dmysql-host={host of database}
 
-4. Project can be imported in an IDE by importing a Maven project.
+4. Project can be imported in an IDE by importing as Maven project.
 
 
