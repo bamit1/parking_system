@@ -1,0 +1,72 @@
+{
+	"id": "97f3ae50-e761-b912-2805-af291677db3b",
+	"name": "Parking",
+	"description": "",
+	"order": [
+		"88117351-60b6-2c2d-d97d-eec9c258820c",
+		"434778f7-20cf-266c-af23-26f4e3e21a3a",
+		"ef337e82-5384-994e-2fca-983e80204a32"
+	],
+	"folders": [],
+	"timestamp": 1495970951268,
+	"owner": "228304",
+	"public": false,
+	"requests": [
+		{
+			"id": "434778f7-20cf-266c-af23-26f4e3e21a3a",
+			"headers": "",
+			"url": "http://localhost:9030/parking/checkin?vNum=10HR19&vType=TWO_WHEELER&checkIn=2016-04-13 12:00:01",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495986708171,
+			"name": "checkIn",
+			"description": "",
+			"collectionId": "97f3ae50-e761-b912-2805-af291677db3b",
+			"responses": []
+		},
+		{
+			"id": "88117351-60b6-2c2d-d97d-eec9c258820c",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:9030/parking/scheme",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495986710699,
+			"name": "Add Scheme",
+			"description": "",
+			"collectionId": "97f3ae50-e761-b912-2805-af291677db3b",
+			"responses": [],
+			"rawModeData": "{\n\t\"vType\":\"TWO_WHEELER\",\n\t\"cType\":[{\"type\":\"ft\",\"hours\":2,\"price\":25.0},{\"type\":\"ft\",\"hours\":3,\"price\":20.0},{\"type\":\"vt\",\"hours\":null,\"price\":5.0}]\n}"
+		},
+		{
+			"id": "ef337e82-5384-994e-2fca-983e80204a32",
+			"headers": "",
+			"url": "http://localhost:9030/parking/checkout?vNum=10HR19&checkOut=2016-04-13 19:00:01",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1495986706218,
+			"name": "Checkout",
+			"description": "",
+			"collectionId": "97f3ae50-e761-b912-2805-af291677db3b",
+			"responses": []
+		}
+	]
+}

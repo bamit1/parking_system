@@ -1,4 +1,5 @@
 
+CREATE DATABASE `parking`;
 
 CREATE TABLE `parking_slip` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,

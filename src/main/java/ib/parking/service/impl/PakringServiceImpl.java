@@ -68,7 +68,10 @@ public class PakringServiceImpl implements ParkingService {
         VehicleType vType = vehicle.getvType();
 
 
-        long timeDiff = Math.abs(slip.getCheckIn().getTime() - slip.getCheckOut().getTime());
+        long timeDiff = slip.getCheckOut().getTime() - slip.getCheckIn().getTime();
+        if (timeDiff <= 0) {
+            throw new IllegalArgumentException("Checkout time cannot be lesser than checkIn time");
+        }
         Long hoursDiff = TimeUnit.MILLISECONDS.toHours(timeDiff);
 
         Charges charges = chargingDao.getCharges(vType);
@@ -80,8 +83,14 @@ public class PakringServiceImpl implements ParkingService {
             if (tempHrs > 0.0) {
 
                 if (ctype instanceof FixedType) {
+
+                    if (ctype.getHours() == null) {
+                        tempHrs = -1L;
+                    } else {
+                        tempHrs -= ctype.getHours();
+                    }
                     price += ctype.getPrice();
-                    tempHrs -= ctype.getHours();
+
                 } else if (ctype instanceof VariableType) {
 
                     if (ctype.getHours() == null) {
