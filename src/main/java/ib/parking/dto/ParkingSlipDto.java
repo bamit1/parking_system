@@ -11,10 +11,10 @@ public class ParkingSlipDto {
     private Long id;
     private VehicalDto vehicle;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss a z", timezone = "IST")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss z", timezone = "IST")
     private Date checkIn;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss a z", timezone = "IST")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss z", timezone = "IST")
     private Date checkOut;
     private Double billAmt;
     private VehichleParkingState state;
