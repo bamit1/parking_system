@@ -4,16 +4,20 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
+import ib.parking.dto.PriceDto;
+
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = As.PROPERTY, property = "type")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = FixedType.class, name = "ft"),
     @JsonSubTypes.Type(value = VariableType.class, name = "vt")
 })
-public class ChargingType {
+public abstract class ChargingType {
 
     private String cType;
     private Long hours;
     private Double price;
+
+    public abstract void calculatePrice(PriceDto pDto);
 
     protected ChargingType(String cType) {
         this.setcType(cType);

@@ -13,11 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ib.parking.dao.ChargingDao;
 import ib.parking.dao.ParkingSlipDao;
 import ib.parking.dto.ParkingSlipDto;
+import ib.parking.dto.PriceDto;
 import ib.parking.model.Charges;
 import ib.parking.model.ChargingType;
-import ib.parking.model.FixedType;
 import ib.parking.model.ParkingSlip;
-import ib.parking.model.VariableType;
 import ib.parking.model.VehichleParkingState;
 import ib.parking.model.Vehicle;
 import ib.parking.model.VehicleType;
@@ -76,37 +75,19 @@ public class PakringServiceImpl implements ParkingService {
 
         Charges charges = chargingDao.getCharges(vType);
 
-        Long tempHrs = hoursDiff + 1;
-        Double price = 0.0;
+        PriceDto pDto = new PriceDto();
+        pDto.hrs = hoursDiff + 1;
+        pDto.price = 0.0;
+
         List<ChargingType> cging = charges.getChargingScheme();
         for (ChargingType ctype : cging) {
-            if (tempHrs > 0.0) {
-
-                if (ctype instanceof FixedType) {
-
-                    if (ctype.getHours() == null) {
-                        tempHrs = -1L;
-                    } else {
-                        tempHrs -= ctype.getHours();
-                    }
-                    price += ctype.getPrice();
-
-                } else if (ctype instanceof VariableType) {
-
-                    if (ctype.getHours() == null) {
-                        price += ctype.getPrice() * tempHrs;
-
-                    } else {
-                        Long diffHr = tempHrs - ctype.getHours();
-                        price += diffHr > 0 ? ctype.getPrice() * ctype.getHours() : ctype.getPrice() * tempHrs;
-                        tempHrs -= ctype.getHours();
-                    }
-                }
+            if (pDto.hrs > 0.0) {
+                ctype.calculatePrice(pDto);
             } else {
                 break;
             }
         }
-        slip.setBillAmt(price);
+        slip.setBillAmt(pDto.price);
         return getPSD(slip);
     }
 
